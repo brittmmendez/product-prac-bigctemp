@@ -8,6 +8,8 @@ import FormikLogin from './FormikLogin';
 import FormikRegister from './FormikRegister';
 import Account from './Account';
 import OrderConfirmation from './OrderConfirmation';
+import SearchResults from './SearchResults';
+import Search from '../components/Search';
 import Payment from './Payment';
 import MyCart from './MyCart';
 import Checkout from './Checkout';
@@ -27,6 +29,8 @@ const Routes = () => (
     <Route exact path="/" component={Home} />
     <Route exact path="/products-page" component={ProductsPage} />
     <Route exact path="/products-page/:productId" component={ProductShow} />
+    <Route exact path="/search" component={Search} />
+    <Route exact path="/search/:searchTerm" component={SearchResults} />
     <Route path="/product1" component={Product1} />
     <Route path="/product2" component={Product2} />
     <Route path="/product3" component={Product3} />
@@ -42,6 +46,7 @@ const Routes = () => (
     <Route path="/checkout" component={Checkout} />
     <Route path="/order-confirmation" component={OrderConfirmation} />
     <Route path="/register" component={FormikRegister} />
+    <Route path="/login" component={FormikLogin} />
     <Route path="/login" component={FormikLogin} />
     <Route path="/account" component={Account} />
     <Route component={NotFound} />

@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-console */
 import { types, flow } from 'mobx-state-tree';
+import fuzzysearch from 'fuzzysearch';
 import User from './User';
 import Checkout from './Checkout';
 import Products from './Products';
@@ -12,6 +13,7 @@ const Shop = types
     user: types.optional(User, {}),
     checkout: types.optional(Checkout, {}),
     products: types.optional(Products, { data: [] }),
+    searchProducts: types.optional(Products, { data: [] }),
     basket: types.optional(Basket, {}),
     apiUrl: 'https://my-mix-api.herokuapp.com/api',
   })
@@ -53,6 +55,13 @@ const Shop = types
         console.log(err);
       }
     }),
+
+    productSearch(searchTerm) {
+      const productsFound = self.products.data.filter(
+        p => fuzzysearch(searchTerm.toLowerCase(), p.name.toLowerCase()),
+      );
+      return productsFound;
+    },
 
     prepOrder() {
       const request = {

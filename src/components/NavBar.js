@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
+import Search from './Search';
 
 @inject('shop')
 @observer
@@ -101,7 +102,10 @@ class NavBar extends Component {
 
             <div className="navbar-end">
               <div className="navbar-item">
-                <div className="field is-grouped" onClick={this.closeNav}>
+                <div className="field is-grouped">
+                  <p className="control">
+                    <Search closeNav={this.closeNav} />
+                  </p>
                   <p className="control">
                     <Link className="bd-tw-button button" to="/my-cart">
                       <span className="icon">
