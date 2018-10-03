@@ -107,7 +107,7 @@ class NavBar extends Component {
                     <Search closeNav={this.closeNav} />
                   </p>
                   <p className="control">
-                    <Link className="bd-tw-button button" to="/my-cart">
+                    <Link className="bd-tw-button button" to="/my-cart" onClick={this.closeNav}>
                       <span className="icon">
                         <i className="fas fa-shopping-cart" />
                       </span>
@@ -121,13 +121,13 @@ class NavBar extends Component {
                   <p className="control">
                     {!shop.user.loggedIn
                       && (
-                      <Link className="bd-tw-button button" to="/login">
+                      <Link className="bd-tw-button button" to="/login" onClick={this.closeNav}>
                         <span>Log In</span>
                       </Link>
                       )}
                     {shop.user.loggedIn
                       && (
-                      <Link className="bd-tw-button button" to="/account">
+                      <Link className="bd-tw-button button" to="/account" onClick={this.closeNav}>
                         <span>My Account</span>
                       </Link>
                       )}
