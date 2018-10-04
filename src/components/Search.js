@@ -1,16 +1,28 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 @inject('shop')
 @observer
-export default class Search extends Component {
+class Search extends Component {
   constructor(props) {
     debugger;
     super(props);
     this.state = {
       searchTerm: '',
     };
+  }
+
+  handleEnter = (event) => {
+    debugger;
+    if (event.keyCode === 13) {
+      debugger;
+      const { form } = event.target;
+      const index = Array.prototype.indexOf.call(form, event.target);
+      debugger;
+      form.elements[index + 1].focus();
+      event.preventDefault();
+    }
   }
 
   handleChange = (event) => {
@@ -22,13 +34,10 @@ export default class Search extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     debugger;
-    if (this.validateForm()) {
-      this.props.history.push(`/search/${this.state.searchTerm}`);
+    if (this.state.searchTerm.length !== 0) {
+      const { history } = this.props;
+      history.push(`/search/${this.state.searchTerm}`);
     }
-  }
-
-  validateForm() {
-    return this.state.searchTerm.length !== 0;
   }
 
   render() {
@@ -46,12 +55,14 @@ export default class Search extends Component {
             />
           </div>
           <div className="control">
-            <Link className="button is-dark" to={`/search/${this.state.searchTerm}`} onClick={this.props.closeNav}>
+            <button className="button is-dark" type="submit" onClick={this.props.closeNav}>
               Search
-            </Link>
+            </button>
           </div>
         </div>
       </form>
     );
   }
 }
+
+export default withRouter(Search);

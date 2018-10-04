@@ -2,38 +2,35 @@ import React, { Component } from 'react';
 import { Formik, Form, Field } from 'formik';
 import Yup from 'yup';
 import { inject, observer } from 'mobx-react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 @inject('shop')
 @observer
 class FormikSearch extends Component {
   render() {
-    const { match } = this.props;
-    console.log(match);
-    debugger;
     return (
       <Formik
         initialValues={{ search: '' }}
         validationSchema={Yup.object().shape({
           search: Yup.string().required(),
         })}
-        onSubmit={(searchTerm, { setSubmitting }) => {
-          debugger;
-          this.props.history.push(`/search/${searchTerm}`);
-          setSubmitting(false);
+        onSubmit={(searchTerm, { setSubmitting, resetForm }) => {
           this.props.closeNav();
+          this.props.history.push(`/search/${searchTerm.search}`);
+          setSubmitting(false);
+          resetForm();
         }}
       >
-        {() => (
+        {({ isSubmitting }) => (
           <Form>
             <div className="field has-addons">
               <div className="control">
-                <Field className="input" type="search" name="search" placeholder="Search" />
+                <Field className="input" type="search" name="search" placeholder="Search Now" />
               </div>
               <div className="control">
-                <Link className="button is-dark" to={`/search/${this.state.searchTerm}`}>
+                <button className="button is-dark" type="submit" disabled={isSubmitting}>
                   Search
-                </Link>
+                </button>
               </div>
             </div>
           </Form>
@@ -43,4 +40,4 @@ class FormikSearch extends Component {
   }
 }
 
-export default FormikSearch;
+export default withRouter(FormikSearch);

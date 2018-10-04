@@ -18,15 +18,80 @@ const Shop = types
     apiUrl: 'https://my-mix-api.herokuapp.com/api',
   })
   .actions(self => ({
-    // initial fetch all products request
-    getProducts: flow(function* getProducts() {
-      if (self.products.productCount === 0) {
-        const response = yield fetch(`${self.apiUrl}/products`);
-        const json = yield response.json();
-        console.log(json);
-        self.products.data = json;
-      }
-    }),
+    // initial fetch all products request, only works
+    // getProducts: flow(function* getProducts() {
+    //   if (self.products.productCount === 0) {
+    //     const response = yield fetch(`${self.apiUrl}/products`);
+    //     const json = yield response.json();
+    //     console.log(json);
+    //     self.products.data = json;
+    //   }
+    // }),
+    getProducts() {
+      const json = [
+        {
+          id: 0,
+          name: 'Laundry Cart',
+          description: 'string',
+          price: 0,
+          options: [
+            {
+              id: 0,
+              option_id: 0,
+              name: 'string',
+              values: [
+                {
+                  value_id: 0,
+                  value_name: 'string',
+                },
+              ],
+            },
+          ],
+          thumbnail_url: 'string',
+        },
+        {
+          id: 0,
+          name: 'Coffee Cart',
+          description: 'string',
+          price: 0,
+          options: [
+            {
+              id: 0,
+              option_id: 0,
+              name: 'string',
+              values: [
+                {
+                  value_id: 0,
+                  value_name: 'string',
+                },
+              ],
+            },
+          ],
+          thumbnail_url: 'string',
+        },
+        {
+          id: 0,
+          name: 'Coffee Cup',
+          description: 'string',
+          price: 0,
+          options: [
+            {
+              id: 0,
+              option_id: 0,
+              name: 'string',
+              values: [
+                {
+                  value_id: 0,
+                  value_name: 'string',
+                },
+              ],
+            },
+          ],
+          thumbnail_url: 'string',
+        },
+      ];
+      self.products.data = json;
+    },
 
     proccessOrder: flow(function* proccessOrder() {
       // sets billing/shipping info and products to correct request format
